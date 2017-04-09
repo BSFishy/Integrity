@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "integrity",
+    "name": "Integrity",
+    "description": "",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["LousyLynx"],
+    "credits": "All credits go to the respective mod authors",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
