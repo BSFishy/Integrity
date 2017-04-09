@@ -123,8 +123,8 @@ bintray {
     publish = true
 
     pkg {
-        repo = 'Integrity'
-        name = 'dev'
+        repo = 'dev'
+        name = 'Integrity'
 
         version {
             name = project.version + '-' + System.getenv('TRAVIS_BUILD_NUMBER')
