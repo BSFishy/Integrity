@@ -102,6 +102,33 @@ processResources {
     }
 }
 
+jar {
+    include "com/raoulvdberge/refinedstorage/**"
+    include "com/jaquadro/minecraft/storagedrawers/api/**"
+    include "assets/**"
+    include "mcmod.info"
+    include "pack.mcmeta"
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier 'deobf'
+}
+
+task apiJar(type: Jar, dependsOn: 'sourceMainJava') {
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+    include 'com/raoulvdberge/refinedstorage/api/**/*'
+    classifier 'api'
+}
+
+artifacts {
+    archives deobfJar
+    archives apiJar
+    archives sourceJar
+    archives jar
+}
+
 publishing {
     publications {
         Bintray(MavenPublication) {
