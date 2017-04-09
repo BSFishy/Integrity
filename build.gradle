@@ -8,9 +8,11 @@ buildscript {
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
+apply plugin: 'com.jfrog.bintray'
 apply plugin: "net.minecraftforge.gradle.forge"
 apply plugin: "checkstyle"
 
@@ -92,5 +94,36 @@ processResources {
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude "mcmod.info"
+    }
+}
+
+publishing {
+    publications {
+        Bintray(MavenPublication) {
+            groupId = project.group
+            artifactId = project.archivesBaseName
+            version = project.version + '-' + System.getenv('TRAVIS_BUILD_NUMBER')
+//            artifact deobfJar
+//            artifact sourceJar
+//            artifact apiJar
+            artifact jar
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['Bintray']
+    publish = true
+
+    pkg {
+        repo = 'Integrity'
+        name = 'dev'
+
+        version {
+            name = project.version + '-' + System.getenv('TRAVIS_BUILD_NUMBER')
+            released = new Date()
+        }
     }
 }
