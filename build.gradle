@@ -56,9 +56,10 @@ dependencies {
     compile "baubles:Baubles:release:1.3.9" //                          Baubles
     compile "blood-magic:BloodMagic-1.10.2:2.1.9:78" //                 Blood Magic
     compile "chisel:Chisel:MC1.10.2:0.0.9.15" //                        Chisel
+    compile "codechicken-lib-1-8:CodeChickenLib:release:universal" //   CodeChickenLib
     compile "cofhcore:CoFHCore-1.10.2:release:universal" //             CoFHCore
     compile "compatlayer:compatlayer:release:0.2.5" //                  Compat Layer
-    compile "crafttweaker:CraftTweaker:release:3.0.24" //               CraftTweaker
+    compile "crafttweaker:CraftTweaker:1.10.2:3.0.24" //                CraftTweaker
     compile "embers:embers:0.104" //                                    Embers
     compile "endercore:EnderCore-1.10.2:0.4.1.65:beta" //               EnderCore
     compile "ender-io:EnderIO:1.10.2:3.1.179" //                        EnderIO

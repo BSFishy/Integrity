@@ -13,6 +13,10 @@ public class ILogger {
         log(Level.INFO, message);
     }
 
+    public static void warn(String message) {
+        log(Level.WARN, message);
+    }
+
     public static void log(Level level, Throwable t, String message) {
         FMLLog.log(level, t, message);
     }
