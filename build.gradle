@@ -53,6 +53,7 @@ repositories {
 
 dependencies {
     compile "actually-additions:ActuallyAdditions:release:r105" //      Actually Additions
+    compile "agricraft:agricraft:latest:a14" //                         Agricraft
     compile "baubles:Baubles:release:1.3.9" //                          Baubles
     compile "blood-magic:BloodMagic-1.10.2:2.1.9:78" //                 Blood Magic
     compile "chisel:Chisel:MC1.10.2:0.0.9.15" //                        Chisel
@@ -62,17 +63,20 @@ dependencies {
     compile "crafttweaker:CraftTweaker:1.10.2:3.0.24" //                CraftTweaker
     compile "embers:embers:0.104" //                                    Embers
     compile "endercore:EnderCore-1.10.2:0.4.1.65:beta" //               EnderCore
-    compile "ender-io:EnderIO:1.10.2:3.1.179" //                        EnderIO
+    compile "ender-io:EnderIO:1.10.2:3.1.180" //                        EnderIO
     compile "ex-compressum:ExCompressum_1.10.2:2.0.97" //               Ex Compressum
     compile "ex-nihilo-adscensio:exnihiloadscensio:1.10.2:0.1.20" //    Ex Nihilo Adscensio
     compile "extra-utilities:extrautils2:1.10.2:1.3.3" //               Extra Utils 2
     compile "forestry:forestry_1.10.2:5.2.17.373" //                    Forestry
     compile "guide-api:Guide-API-1.10.2:2.0.3:46" //                    Guide API
+    compile "infinitylib:infinitylib:0.8.0" //                          InfinityLib
     compile "just-enough-items-jei:jei_1.10.2:3.14.7.417" //            Just Enough Items
     compile "mantle:Mantle:1.10.2:1.1.5" //                             Mantle
     compile "mcmultipart:MCMultiPart:1.3.0:universal" //                MCMultiPart
     compile "modtweaker:ModTweaker2:2.0.11" //                          ModTweaker
     compile "mtlib:MTLib:1.0.2" //                                      MTLib
+    //compile "mystical-agriculture:mysticalagriculture%5B1.10.2%5D:release" // Mystical Agriculture
+    compile "projecte:ProjectE:1.10.2:PE1.2.0" //                       ProjectE
     compile "random-things:RandomThings:MC1.10.2:3.7.7" //              Random Things
     compile "refined-storage:refinedstorage:1.2.25" //                  Refined Storage
 
