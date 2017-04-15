@@ -8,14 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RefinedStorageIntegration extends ModIntegration {
+    private List<Integration> integrations = new ArrayList<>();
+
     public RefinedStorageIntegration() {
         super(new RefinedStorageProvider());
     }
 
     @Override
-    public List<Integration> getIntegrations() {
-        List<Integration> integrations = new ArrayList<>();
+    public void setup() {
 
+    }
+
+    @Override
+    public List<Integration> getIntegrations() {
         return integrations;
     }
 }

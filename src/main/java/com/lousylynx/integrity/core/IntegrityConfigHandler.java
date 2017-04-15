@@ -50,7 +50,7 @@ public class IntegrityConfigHandler {
             else
                 ILogger.warn("There was an issue creating the " + modid + " config folder");
 
-        File config = new File(folder, name + ".yml");
+        File config = new File(folder, name + ".cfg");
         if (!config.exists())
             try {
                 if (config.createNewFile())

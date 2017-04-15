@@ -14,13 +14,33 @@ public abstract class Integration {
 
     @Getter
     private String modid;
+    @Getter
+    private IntegrationProvider provider;
+    private Configuration inModFolderConfig;
+    private Configuration notInModFolderConfig;
 
     public void setup(String modid) {
+        setup(modid, provider);
+    }
+
+    public void setup(String modid, IntegrationProvider provider) {
         this.modid = modid;
+        this.provider = provider;
+
+        this.inModFolderConfig = IntegrityConfigHandler.getModConfig(getConfigFolderName(), getConfigFileName());
+        this.notInModFolderConfig = IntegrityConfigHandler.getConfig(getConfigFileName());
     }
 
     public String getConfigFileName() {
         return modid;
+    }
+
+    public String getConfigFolderName() {
+        return modid;
+    }
+
+    public boolean hasProvider() {
+        return provider != null;
     }
 
     public void preInit(FMLPreInitializationEvent e) {
@@ -37,7 +57,7 @@ public abstract class Integration {
     }
 
     public Configuration getConfig(boolean inModFolder) {
-        return inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        return inModFolder ? inModFolderConfig : notInModFolderConfig;
     }
 
     protected Property getConfigOption(String category, String key, boolean defaultValue) {
@@ -45,7 +65,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, boolean defaultValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue);
     }
 
@@ -54,7 +74,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, boolean defaultValue, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment);
     }
 
@@ -63,7 +83,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, boolean[] defaultValues, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues);
     }
 
@@ -72,7 +92,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, boolean[] defaultValues, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment);
     }
 
@@ -81,7 +101,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, boolean[] defaultValues, String comment, boolean isListLengthFixed, int maxListLength, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, isListLengthFixed, maxListLength);
     }
 
@@ -90,7 +110,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int defaultValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue);
     }
 
@@ -99,7 +119,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int defaultValue, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment);
     }
 
@@ -108,7 +128,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int defaultValue, String comment, int minValue, int maxValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment, minValue, maxValue);
     }
 
@@ -117,7 +137,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int[] defaultValues, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues);
     }
 
@@ -126,7 +146,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int[] defaultValues, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment);
     }
 
@@ -135,7 +155,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int[] defaultValues, String comment, int minValue, int maxValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, minValue, maxValue);
     }
 
@@ -144,7 +164,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, int[] defaultValues, String comment, int minValue, int maxValue, boolean isListLengthFixed, int maxListLength, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, minValue, maxValue, isListLengthFixed, maxListLength);
     }
 
@@ -153,7 +173,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double defaultValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue);
     }
 
@@ -162,7 +182,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double defaultValue, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment);
     }
 
@@ -171,7 +191,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double defaultValue, String comment, double minValue, double maxValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment, minValue, maxValue);
     }
 
@@ -180,7 +200,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double[] defaultValues, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues);
     }
 
@@ -189,7 +209,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double[] defaultValues, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment);
     }
 
@@ -198,7 +218,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double[] defaultValues, String comment, double minValue, double maxValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, minValue, maxValue);
     }
 
@@ -207,7 +227,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, double[] defaultValues, String comment, double minValue, double maxValue, boolean isListLengthFixed, int maxListLength, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, minValue, maxValue, isListLengthFixed, maxListLength);
     }
 
@@ -216,7 +236,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String defaultValue, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue);
     }
 
@@ -225,7 +245,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String defaultValue, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment);
     }
 
@@ -234,7 +254,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String defaultValue, String comment, Pattern validationPattern, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment, validationPattern);
     }
 
@@ -243,7 +263,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String defaultValue, String comment, String[] validValues, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment, validValues);
     }
 
@@ -252,7 +272,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String[] defaultValues, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues);
     }
 
@@ -261,7 +281,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String[] defaultValues, String comment, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment);
     }
 
@@ -270,7 +290,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String[] defaultValues, String comment, Pattern validationPattern, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, validationPattern);
     }
 
@@ -279,7 +299,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String[] defaultValues, String comment, boolean isListLengthFixed, int maxListLength, Pattern validationPattern, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, isListLengthFixed, maxListLength, validationPattern);
     }
 
@@ -288,7 +308,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String defaultValue, String comment, Property.Type type, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValue, comment, type);
     }
 
@@ -297,7 +317,7 @@ public abstract class Integration {
     }
 
     protected Property getConfigOption(String category, String key, String[] defaultValues, String comment, Property.Type type, boolean inModFolder) {
-        Configuration config = inModFolder ? IntegrityConfigHandler.getModConfig(modid, getConfigFileName()) : IntegrityConfigHandler.getConfig(modid);
+        Configuration config = getConfig(inModFolder);
         return config.get(category, key, defaultValues, comment, type);
     }
 }

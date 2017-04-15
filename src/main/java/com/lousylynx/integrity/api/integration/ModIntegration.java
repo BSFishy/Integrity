@@ -1,9 +1,11 @@
 package com.lousylynx.integrity.api.integration;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraftforge.fml.common.Loader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -12,9 +14,11 @@ public abstract class ModIntegration {
 
     private final String modid;
     private IntegrationProvider provider = null;
+    @Getter
+    protected List<Integration> integrations = new ArrayList<>();
 
     public ModIntegration(IntegrationProvider provider) {
-        modid = provider.getModid();
+        this.modid = provider.getModid();
         this.provider = provider;
     }
 
@@ -22,5 +26,9 @@ public abstract class ModIntegration {
         return provider != null ? Loader.isModLoaded(modid) && Loader.isModLoaded(provider.getModid()) : Loader.isModLoaded(modid);
     }
 
-    public abstract List<Integration> getIntegrations();
+    public boolean hasProvider() {
+        return provider != null;
+    }
+
+    public abstract void setup();
 }

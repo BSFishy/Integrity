@@ -13,7 +13,7 @@ public class IntegrityMod {
 
     public static final String modid = "integrity";
     public static final String version = "0.1.0";
-    public static final String dependencies = "required-after:Forge@[12.18.3.2272,);";
+    public static final String dependencies = "required-after:Forge@[12.18.3.2272,);after:EnderIO;after:refinedstorage";
 
     public static IAPI API = new IntegrityAPI();
 
